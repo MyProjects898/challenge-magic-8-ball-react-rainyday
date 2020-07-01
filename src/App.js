@@ -1,59 +1,95 @@
-import React from 'react';
-import './App.css'
+import React, { Component } from 'react';
+// import logo from './logo.svg';
+import './App.css';
+import Background from './vegas.jpeg';
+
+
+
 
 class App extends React.Component {
-  constructor(props){
+  constructor (props) {
     super(props)
     this.state = {
-      // Add magic 8 ball outcomes to the array
-      answerArray: ['yes', 'no', 'maybe'],
-      question: ""
+      answerArray: [
+          'YES!!!!!!! ',
+          'NO NO NO and NO ',
+          "WELL Maybe... ",
+          "if you'll be good",
+          'In YOUR DREAMS',
+          'How about NO',
+          'I REALLY think NOT',
+          'Think you CAN, but NO',
+          'Come again later',
+          "How dare you!?!?!",
+          "Lets not talk about it",
+          "Will talk tomorrow"
+        ],
+      quastion: ''
     }
   }
 
+
+
   getAnswer = () => {
-    // destructures answerArray out of state
-    const { answerArray } = this.state
-        let answerRandom = Math.floor(Math.random() * 3);
-    return answerArray[answerRandom]
-
-
-
-    // write your code here!
-    // Update the return statement below to reflect the outcome of your code.
-
-  }
+    const { answerArray } = this.state;
+    return this.state.answerArray[ Math.ceil(Math.random() * this.state.answerArray.length) ]
+  };
 
   handleChange = (e) => {
-    // gets the event from the input on change and updates state
-    this.setState({ question: e.target.value })
+    this.setState({ quastion: e.target.value })
   }
 
-  handleSubmit = () =>{
-    // destructures question out of state
-    const { question } = this.state
-    // calls the getAnswer function and saves the outcome as answer
-    const answer = this.getAnswer()
-    this.setState({ answer: answer })
+  handleSubmit = () => {
+
+    const { quastion } = this.setState;
+
+
+
+    if (this.state.quastion === null || this.state.quastion === '')  {
+      return alert ("come on now! be realistic!!!")
+    } else {
+      const answer = this.getAnswer();
+      this.setState({ answer: answer });
+    }
+
   }
 
-  render(){
-    return (
-      <div>
-        <h1>Magic 8 Ball</h1>
-        <input
-          id="inputBox"
-          type='text'
-          onChange={ this.handleChange }
-        />
-        <br />
-        <button onClick={ this.handleSubmit }>
-          Ask the Magic 8 Ball a Question
-        </button>
-        <p id = "ball8"> { this.state.answer } </p>
-      </div>
+render(){
+  return (
+    <div class="fullBody">
+      <h1 class="header">The Magic Evil Ball</h1>
+      <p><input
+        id="inputBox"
+        type='text'
+        onChange={ this.handleChange }
+      /></p>
+
+      <p><button onClick={ this.handleSubmit } >
+        Ask the EYE ball a quastion
+      </button></p>
+
+
+
+
+
+      <br />
+          <p class="sphere">{ this.state.answer }</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
     )
   }
 }
-
 export default App;
